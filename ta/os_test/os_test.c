@@ -576,6 +576,8 @@ static TEE_Result test_time(void)
 	return TEE_SUCCESS;
 }
 
+/* TODO: will enable float test for x86 */
+#if 0
 #ifdef CFG_TA_FLOAT_SUPPORT
 static bool my_dcmpeq(double v1, double v2, double prec)
 {
@@ -659,7 +661,10 @@ static TEE_Result test_float(void)
 	return TEE_SUCCESS;
 }
 #endif /*CFG_TA_FLOAT_SUPPORT*/
+#endif
 
+/* TODO: will enable jmp test for x86 */
+#if 0
 static __noinline void call_longjmp(jmp_buf env)
 {
 	DMSG("Calling longjmp");
@@ -679,6 +684,7 @@ static TEE_Result test_setjmp(void)
 		return TEE_ERROR_GENERIC;
 	}
 }
+#endif
 
 TEE_Result ta_entry_basic(uint32_t param_types, TEE_Param params[4])
 {
@@ -702,13 +708,14 @@ TEE_Result ta_entry_basic(uint32_t param_types, TEE_Param params[4])
 	if (res != TEE_SUCCESS)
 		return res;
 
-	res = test_float();
+	/* TODO: will enable these when support is available */
+	/*res = test_float();
 	if (res != TEE_SUCCESS)
 		return res;
 
 	res = test_setjmp();
 	if (res != TEE_SUCCESS)
-		return res;
+		return res;*/
 
 	return TEE_SUCCESS;
 }
@@ -880,6 +887,8 @@ static void undef_instr(void)
 	__asm__(".word 0x0");
 #elif defined(ARM32)
 	__asm__(".word 0xe7ffffff");
+#elif defined(X86_64)
+	__asm__(".word 0x0B0F");
 #else
 #error "Unsupported architecture"
 #endif
