@@ -1707,12 +1707,12 @@ static void xtest_tee_test_1021(ADBG_Case_t *c)
 	test_panic_ca_to_ta(c, &sims_test_ta_uuid, false);
 	Do_ADBG_EndSubCase(c, "Single Instance Multi Sessions");
 
+	/* TODO:Will enable it for OP-TEE x86_64 later */
+#if 0
 	Do_ADBG_BeginSubCase(c, "Single Instance Multi Sessions Keep Alive");
 	test_panic_ca_to_ta(c, &sims_keepalive_test_ta_uuid, false);
 	Do_ADBG_EndSubCase(c, "Single Instance Multi Sessions Keep Alive");
 
-	/* TODO:Will enable it for OP-TEE x86_64 later */
-#if 0
 	Do_ADBG_BeginSubCase(c, "Multi Sessions TA to TA");
 	test_panic_ta_to_ta(c, &sims_test_ta_uuid,
 			    &sims_keepalive_test_ta_uuid);
