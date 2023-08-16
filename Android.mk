@@ -35,6 +35,10 @@ srcs += regression_2000.c \
 	rand_stream.c
 endif
 
+ifeq ($(CFG_SECSTOR_TA_MGMT_PTA),y)
+srcs += install_ta.c
+endif
+
 srcs +=	adbg/src/adbg_case.c \
 	adbg/src/adbg_enum.c \
 	adbg/src/adbg_expect.c \
@@ -56,10 +60,6 @@ srcs +=	adbg/src/adbg_case.c \
 	xtest_main.c \
 	xtest_test.c \
 	xtest_uuid_helpers.c
-
-ifeq ($(CFG_SECSTOR_TA_MGMT_PTA),y)
-srcs += install_ta.c
-endif
 
 ifeq ($(CFG_SECURE_DATA_PATH),y)
 srcs += sdp_basic.c
@@ -153,7 +153,7 @@ LOCAL_MODULE_TAGS := optional
 
 # Build the 32-bit and 64-bit versions.
 LOCAL_MULTILIB := both
-LOCAL_MODULE_TARGET_ARCH := arm arm64
+LOCAL_MODULE_TARGET_ARCH := x86 x86_64
 
 include $(BUILD_SHARED_LIBRARY)
 
