@@ -35,10 +35,6 @@ srcs += regression_2000.c \
 	rand_stream.c
 endif
 
-ifeq ($(CFG_SECSTOR_TA_MGMT_PTA),y)
-srcs += install_ta.c
-endif
-
 srcs +=	adbg/src/adbg_case.c \
 	adbg/src/adbg_enum.c \
 	adbg/src/adbg_expect.c \
@@ -60,6 +56,10 @@ srcs +=	adbg/src/adbg_case.c \
 	xtest_main.c \
 	xtest_test.c \
 	xtest_uuid_helpers.c
+
+# Workaround for compiling in Android
+# Assume CFG_SECSTOR_TA_MGMT_PTA always enabled on x86 
+srcs += install_ta.c
 
 ifeq ($(CFG_SECURE_DATA_PATH),y)
 srcs += sdp_basic.c
